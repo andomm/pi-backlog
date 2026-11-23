@@ -1,0 +1,22 @@
+{
+  "name": "pi-backlog",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Markdown backlog manager: CLI (pi-backlog) and Pi TUI extension for ~/wiki/backlog.md",
+  "type": "module",
+  "bin": { "pi-backlog": "bin/pi-backlog" },
+  "scripts": {
+    "build": "esbuild src/cli/backlog-cli.ts --bundle --platform=node --format=esm --outfile=dist/backlog-cli.mjs",
+    "prepare": "npm run build",
+    "test": "tsx --test src/lib/backlog.test.ts",
+    "backlog": "tsx src/cli/backlog-cli.ts"
+  },
+  "keywords": ["pi-package"],
+  "pi": { "extensions": ["./extensions/backlog.ts"] },
+  "peerDependencies": {
+    "@mariozechner/pi-coding-agent": "*",
+    "@mariozechner/pi-tui": "*",
+    "typebox": "*"
+  },
+  "devDependencies": { "esbuild": "*", "tsx": "*" }
+}

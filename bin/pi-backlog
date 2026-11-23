@@ -1,0 +1,8 @@
+#!/bin/bash
+here="$(cd "$(dirname "$(readlink -f "$0")")/.." && pwd)"
+out="$here/dist/backlog-cli.mjs"
+# Rebuild when the bundle is missing or any source file is newer.
+if [ ! -f "$out" ] || [ -n "$(find "$here/src" -name '*.ts' -newer "$out" -print -quit)" ]; then
+  (cd "$here" && npm run build --silent) >&2 || exit 1
+fi
+exec node "$out" "$@"
